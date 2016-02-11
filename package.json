@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "jspm": "jspm",
     "start": "serve"
   },
   "author": "",
