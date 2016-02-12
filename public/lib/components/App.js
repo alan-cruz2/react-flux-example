@@ -17,16 +17,18 @@ class App extends React.Component {
     this.addItem = this.addItem.bind(this);
   }
 
-  addItem(newItem) {
-    newItem.id = Date.now();
-    this.setState({
-      items: this.state.items.concat(newItem)
-    })
+  addItem(inputItem) {
+    post("/api/new", inputItem)
+      .done(serverItem => {
+        this.setState({
+          items: this.state.items.concat(serverItem)
+        })
+      });
   }
 
   componentDidMount() {
     get("/api/data")
-      .done(data => console.log(data));
+      .done(data => this.setState(data));
   }
 
   render() {
