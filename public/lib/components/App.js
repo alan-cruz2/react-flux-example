@@ -1,7 +1,6 @@
 import Search from "./Search";
 import PlacesItems from "./PlacesItems";
 import Detail from "./Detail";
-import { get, post } from "jquery";
 
 let _getAppState = () => {
   return {
@@ -18,17 +17,17 @@ class App extends React.Component {
   }
 
   addItem(inputItem) {
-    post("/api/new", inputItem)
-      .done(serverItem => {
-        this.setState({
-          items: this.state.items.concat(serverItem)
-        })
-      });
+    // post("/api/new", inputItem)
+    //   .done(serverItem => {
+    //     this.setState({
+    //       items: this.state.items.concat(serverItem)
+    //     })
+    //   });
   }
 
   componentDidMount() {
-    get("/api/data")
-      .done(data => this.setState(data));
+    // get("/api/data")
+    //   .done(data => this.setState(data));
   }
 
   render() {
