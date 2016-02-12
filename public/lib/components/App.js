@@ -2,6 +2,8 @@ import Search from "./Search";
 import PlacesItems from "./PlacesItems";
 import Detail from "./Detail";
 
+import ItemStore from "../flux/ItemStore";
+
 let _getAppState = () => {
   return {
     items: []
