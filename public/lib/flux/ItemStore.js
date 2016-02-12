@@ -1,30 +1,20 @@
-import { EventEmitter } from "events";
 import AppDispatcher from "./AppDispatcher";
+import { ReduceStore } from "flux/utils";
 
-let _items = [];
-
-class ItemStore extends EventEmitter {
-  constructor(props) {
-    super(props);
-
-    AppDispatcher.register(action => {
-      switch (action.type) {
-        case 'RECEIVE_ITEMS':
-          _items = action.items;
-          this.emit("change");
-          break;
-        case 'RECEIVE_ONE_ITEM':
-          _items.push(action.item);
-          this.emit("change");
-          break;
-        default:
-          // do nothing
-      }
-    });
+class ItemStore extends ReduceStore {
+  getInitialState() {
+    return [];
   }
-  getAll() {
-    return _items;
+  reduce(state, action) {
+    switch (action.type) {
+      case 'RECEIVE_ITEMS':
+        return action.items;
+      case 'RECEIVE_ONE_ITEM':
+        return state.concat(action.item);
+      default:
+        return state;
+    }
   }
 }
 
-export default new ItemStore();
+export default new ItemStore(AppDispatcher);

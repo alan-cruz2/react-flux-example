@@ -4,20 +4,23 @@ import Detail from "./Detail";
 
 import ItemStore from "../flux/ItemStore";
 import ItemActions from "../flux/ItemActions";
-
-let _getAppState = () => {
-  return {
-    items: ItemStore.getAll()
-  }
-};
+import { Container } from "flux/utils";
 
 class App extends React.Component {
+  static getStores() {
+    return [ItemStore];
+  }
+
+  static calculateState(prevState) {
+    return {
+      items: ItemStore.getState()
+    };
+  }
+
   constructor(props) {
     super(props);
 
-    this.state = _getAppState();
     this.addItem = this.addItem.bind(this);
-    this.onStoreChange = this.onStoreChange.bind(this);
   }
 
   addItem(inputItem) {
@@ -26,15 +29,6 @@ class App extends React.Component {
 
   componentDidMount() {
     ItemActions.getAllItems();
-    ItemStore.on("change", this.onStoreChange);
-  }
-
-  componentWillUnmount() {
-    ItemStore.removeListener("change", this.onStoreChange);
-  }
-
-  onStoreChange() {
-    this.setState(_getAppState());
   }
 
   render() {
@@ -50,4 +44,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Container.create(App);
