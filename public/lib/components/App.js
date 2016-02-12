@@ -1,14 +1,11 @@
 import Search from "./Search";
 import PlacesItems from "./PlacesItems";
 import Detail from "./Detail";
+import { get, post } from "jquery";
 
 let _getAppState = () => {
   return {
-    items: [
-      { id: 1, title: 'Item 44' },
-      { id: 2, title: 'Item 2' },
-      { id: 3, title: '42' }
-    ]
+    items: []
   }
 };
 
@@ -26,6 +23,12 @@ class App extends React.Component {
       items: this.state.items.concat(newItem)
     })
   }
+
+  componentDidMount() {
+    get("/api/data")
+      .done(data => console.log(data));
+  }
+
   render() {
     return (
       <div>
