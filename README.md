@@ -10,7 +10,7 @@ cd react-jspm-template
 
 npm install
 
-npm jspm install
+npm run jspm install
 
 npm start
 ```
