@@ -8,11 +8,13 @@ class ItemStore extends EventEmitter {
     super(props);
 
     AppDispatcher.register(action => {
-      console.log("3. Action dispatched", action);
-
       switch (action.type) {
         case 'RECEIVE_ITEMS':
           _items = action.items;
+          this.emit("change");
+          break;
+        case 'RECEIVE_ONE_ITEM':
+          _items.push(action.item);
           this.emit("change");
           break;
         default:

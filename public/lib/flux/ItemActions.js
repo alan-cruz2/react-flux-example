@@ -1,12 +1,24 @@
 import AppDispatcher from "./AppDispatcher";
+import API from "./API";
 
 const ItemActions = {
-  receiveItems(data) {
-    console.log("2. In Actions");
+  receiveItems(items) {
     AppDispatcher.dispatch({
       type: 'RECEIVE_ITEMS',
-      items: data.items
+      items
     });
+  },
+  receiveOneItem(item) {
+    AppDispatcher.dispatch({
+      type: 'RECEIVE_ONE_ITEM',
+      item
+    });
+  },
+  getAllItems() {
+    API.getAllItems();
+  },
+  createItem(inputItem) {
+    API.createItem(inputItem);
   }
 };
 

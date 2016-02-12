@@ -3,6 +3,7 @@ import PlacesItems from "./PlacesItems";
 import Detail from "./Detail";
 
 import ItemStore from "../flux/ItemStore";
+import ItemActions from "../flux/ItemActions";
 
 let _getAppState = () => {
   return {
@@ -20,17 +21,11 @@ class App extends React.Component {
   }
 
   addItem(inputItem) {
-    // post("/api/new", inputItem)
-    //   .done(serverItem => {
-    //     this.setState({
-    //       items: this.state.items.concat(serverItem)
-    //     })
-    //   });
+    ItemActions.createItem(inputItem);
   }
 
   componentDidMount() {
-    // get("/api/data")
-    //   .done(data => this.setState(data));
+    ItemActions.getAllItems();
     ItemStore.on("change", this.onStoreChange);
   }
 
@@ -39,7 +34,6 @@ class App extends React.Component {
   }
 
   onStoreChange() {
-    console.log("4. In the view CB");
     this.setState(_getAppState());
   }
 

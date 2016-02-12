@@ -4,15 +4,14 @@ import ItemActions from "./ItemActions";
 
 const API = {
   getAllItems() {
-    console.log("1. In API");
     get("/api/data")
-      .done(serverData => ItemActions.receiveItems(serverData))
+      .done(serverData => ItemActions.receiveItems(serverData.items))
       .fail(error => console.error(error))
   },
 
-  createNewItem(inputItem) {
+  createItem(inputItem) {
     post("/api/new", inputItem)
-      .done(serverItem => console.log())
+      .done(serverItem => ItemActions.receiveOneItem(serverItem))
       .fail(error => console.error(error))
   }
 };
