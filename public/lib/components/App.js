@@ -6,7 +6,7 @@ import ItemStore from "../flux/ItemStore";
 
 let _getAppState = () => {
   return {
-    items: []
+    items: ItemStore.getAll()
   }
 };
 
@@ -16,6 +16,7 @@ class App extends React.Component {
 
     this.state = _getAppState();
     this.addItem = this.addItem.bind(this);
+    this.onStoreChange = this.onStoreChange.bind(this);
   }
 
   addItem(inputItem) {
@@ -30,6 +31,16 @@ class App extends React.Component {
   componentDidMount() {
     // get("/api/data")
     //   .done(data => this.setState(data));
+    ItemStore.on("change", this.onStoreChange);
+  }
+
+  componentWillUnmount() {
+    ItemStore.removeListener("change", this.onStoreChange);
+  }
+
+  onStoreChange() {
+    console.log("4. In the view CB");
+    this.setState(_getAppState());
   }
 
   render() {
