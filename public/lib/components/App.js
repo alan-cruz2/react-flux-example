@@ -13,7 +13,8 @@ class App extends React.Component {
 
   static calculateState(prevState) {
     return {
-      items: ItemStore.getState()
+      items: ItemStore.getState().items,
+      total: ItemStore.getState().rawItems.length
     };
   }
 
@@ -38,7 +39,7 @@ class App extends React.Component {
         <Search />
         <PlacesItems items={this.state.items} />
         <Detail addItem={this.addItem} />
-        {this.state.items.length} Items
+        {this.state.total} Items
       </div>
     );
   }

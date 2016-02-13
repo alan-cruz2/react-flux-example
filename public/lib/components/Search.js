@@ -1,8 +1,13 @@
+import ItemActions from "../flux/ItemActions";
+
 class Search extends React.Component {
+  setSearchQuery(event) {
+    ItemActions.search(event.target.value);
+  }
   render() {
     return (
       <div>
-        Search...
+        <input placeholder="Search" onChange={this.setSearchQuery} />
       </div>
     )
   }

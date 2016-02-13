@@ -19,6 +19,12 @@ const ItemActions = {
   },
   createItem(inputItem) {
     API.createItem(inputItem);
+  },
+  search(query) {
+    AppDispatcher.dispatch({
+      type: 'SEARCH',
+      query
+    });
   }
 };
 

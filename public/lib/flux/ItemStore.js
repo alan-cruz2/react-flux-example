@@ -3,14 +3,28 @@ import { ReduceStore } from "flux/utils";
 
 class ItemStore extends ReduceStore {
   getInitialState() {
-    return [];
+    return {
+      rawItems: [],
+      items: []
+    }
   }
   reduce(state, action) {
     switch (action.type) {
       case 'RECEIVE_ITEMS':
-        return action.items;
+        return {
+          rawItems: action.items,
+          items: action.items
+        };
       case 'RECEIVE_ONE_ITEM':
-        return state.concat(action.item);
+        return {
+          rawItems: state.rawItems.concat(action.item),
+          items: state.items.concat(action.item)
+        };
+      case 'SEARCH':
+        return {
+          rawItems: state.rawItems,
+          items: state.rawItems.filter(item => item.title.indexOf(action.query) >= 0)
+        }
       default:
         return state;
     }
